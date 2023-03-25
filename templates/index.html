@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OpenAI Dictionary</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container py-3 mt-4">
+        <h1 class="text-center">OpenAI Dictionary</h1>
+        <div class="row justify-content-center py-3">
+            <form id="definition-form" method="POST" class="form-group">
+                <label for="sample-sentence">Sample Sentence:</label>
+                <textarea id="sample-sentence" name="sample-sentence" class="form-control mb-4" style="height: 100px; width: 100%;"></textarea>
+                <label for="word">Word:</label>
+                <input type="text" id="word" name="word" class="form-control"><br>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Get Definition</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="container" id="definition-container" class="my-3"></div>
+
+    <script>
+        $(document).ready(function() {
+            $("#definition-form").submit(function(event) {
+                event.preventDefault();
+                var form_data = $(this).serialize();
+                $.ajax({
+                    url: "/get_definition",
+                    method: "POST",
+                    data: form_data,
+                    success: function(definition) {
+                        $("#definition-container").html(definition);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
