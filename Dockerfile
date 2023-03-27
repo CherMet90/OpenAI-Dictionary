@@ -3,7 +3,7 @@ FROM python:3.11.2-slim-buster
 
 # Set environment variables
 ENV FLASK_APP=src.backend
-ENV FLASK_ENV=production
+ENV FLASK_ENV=development
 ENV FLASK_RUN_HOST=0.0.0.0
 
 # Set working directory
@@ -20,4 +20,4 @@ COPY ./src ./src
 EXPOSE 5000
 
 # Start the application
-CMD ["flask", "run"]
+CMD ["flask", "run", "--reload"]
