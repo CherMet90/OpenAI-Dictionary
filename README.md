@@ -14,5 +14,5 @@ The web application allows the user to request a definition for a word or phrase
 4. Build the container by running the following command:  
     ```docker build -t openai-dict .```
 5. Run the container with the following command:  
-    ```docker run --env-file .env -p 5000:5000 openai-dict```  
+    ```docker run --name openai-dict_container --env-file .env -p 5000:5000 -d -v ${pwd}:/app openai-dict```  
 This method does not require you to install Python or its libraries on your machine.
