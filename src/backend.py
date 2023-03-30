@@ -11,6 +11,8 @@ OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 
 @lru_cache(maxsize=128)  # Cache up to 128 most recent requests
 def get_giphy_url(word):
+    # Remove space from the end of the word
+    word = word.strip()
     if ' ' in word:
         return None
     response = requests.get(
@@ -39,7 +41,6 @@ def get_definition():
     return render_template('definition.html', definition=definition, gif_url=gif_url, word=word)
 
 def get_gpt_definition(sentence, word):
-    # Use the OpenAI API to get the definition
     response = requests.post(
         "https://api.openai.com/v1/completions",
         headers={
